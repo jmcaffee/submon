@@ -10,7 +10,7 @@ and generates a minecraft `whitelist` file.
 Each site that submon monitors is handled via plugin allowing for additional
 sites to be monitored in the future.
 
-At the time of release, the following APIs are supported:
+At the time of release, the following APIs may be supported:
 
 - Gamewisp
 - Patreon
@@ -72,38 +72,35 @@ Installing submon
 
 ### Linux
 
-Extract the `submon-*-.7z` and run the installer script with sudo:
+Clone the app from github using
 
-    sudo ./install.sh
+    git clone https://github.com/jmcaffee/submon.git
 
-The install script will install submon to `/usr/local/src/` and
-create a link in `/usr/local/bin`.
+Run the `setup` script
 
-The uninstall script will remove the link and src directories.
+    ./bin/setup
 
-If updating, run the `uninstall.sh` to remove the old version, then run the
-`install.sh` script to install the new version.
+Go to gamewisp and create credentials for your version of submon.
 
-You should keep your configuration files in your home dir (or a subdirectory
-of your home dir [`.submon` by default]) so uninstalling and
-reinstalling the app will not mess with your configuration.
+Edit and fill out `.envsetup` with the client ID and client secret obtained
+from Gamewisp.
+
+Run submon:
+
+    source .envsetup && ./exe/submon
+
+Follow the instructions on the screen by copy/pasting the URL into your browser
+and allowing submon to access your metrics.
+
+A token store file will be created under ~/.gamewisp containing the access and
+refresh tokens provided by Gamewisp.
 
 - - -
 
 Configuration
 -------------------------------------------------------------------------------
 
-The first time submon is run, you'll need to configure it.
-
-Start submon with the `--init` command line option.
-
-### Linux
-
-    submon --init
-
-Complete the questions with your information.
-
-_$$ List out the questions and what they are for $$_
+_$$ TBD $$_
 
 - - -
 
@@ -123,58 +120,10 @@ Create a cron task to run `submon` once every hour:
 
 In the editor, enter
 
-    05 * * * * /usr/local/bin/submon
+    05 * * * * /path/to/submon
 
 The example above will run `submon` every hour at 5 minutes after
 the top of the hour.
-
-- - -
-
-Building
--------------------------------------------------------------------------------
-
-The following rake tasks will clean the build and dist dirs, then build
-the scripts and bundle the result into a 7-zip (`7z`) archive.
-
-    rake build:clean dist:clean dist
-
-The distro can be found in `dist`.
-
-Additional tasks can be listed with
-
-    rake -T
-
-- - -
-
-Testing
--------------------------------------------------------------------------------
-
-`guard` is supported for testing submon.
-
-To successfully run the gamewisp tests, you'll need your gamewisp API key.
-Create a file named `.envsetup` in the project root containing the following:
-
-    #!/bin/bash
-    # vi: ft=shell
-
-    export GAMEWISP_API_KEY=PUT_YOUR_KEY_HERE
-
-Replace `PUT_YOUR_KEY_HERE` with your API key and save it.
-
-Before running tests, in the terminal you'll start the tests from,
-source `.envsetup` file, then run your tests.
-The tests will look for the API key in the environment variables.
-
-    $ source ./.envsetup
-    $ bundle exec rspec
-
-Or, if using guard:
-
-    $ source ./.envsetup
-    $ bundle exec guard
-
-`.envsetup` is ignored in `.gitignore` so you don't have to worry about your
-API key getting uploaded/committed to the repo.
 
 - - -
 
@@ -182,7 +131,7 @@ Contributing
 -------------------------------------------------------------------------------
 
 1. Fork it ( https://github.com/jmcaffee/submon/fork )
-1. Clone it (`git clone git@github.com:[my-github-username]/submon.git`)
+1. Clone it (`git clone git@github.com:[my-github-user-name]/submon.git`)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Create tests for your feature branch
 4. Commit your changes (`git commit -am 'Add some feature'`)
