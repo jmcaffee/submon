@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+##############################################################################
+# File::    submon.rb
+# Purpose:: Subscription Monitoring Application
+# 
+# Author::    Jeff McAffee 11/08/2016
+# Copyright:: Copyright (c) 2016, kTech Systems LLC. All rights reserved.
+# Website::   http://ktechsystems.com
+##############################################################################
+
+
+require "bundler/setup"
+require 'gamewisp'
+
+$LOAD_PATH.unshift(File.expand_path("../../lib", __FILE__))
+require "submon"
+
+# Exit cleanly from early interrupt
+Signal.trap("INT") { exit 1 }
+
+
+class SubmonApp
+
+  attr_reader :gw
+
+  def initialize
+    @gw = Gamewisp::Client.new
+  end
+
+  def execute
+    puts "Renewing access token..."
+    gw.renew_access_token
+
+    puts "Getting subscribers..."
+    response = gw.get_subscribers
+
+    puts "---BEGIN-RESPONSE---"
+    puts response
+    puts "---END-RESPONSE---"
+  end
+end
+
+begin
+  SubmonApp.new.execute
+rescue SystemExit
+
+rescue Exception => e
+  puts "An error occurred.\nPlease send the following information to support@ktechsystems.com:"
+  puts "\t" + e.message
+  puts
+  if Submon::VERSION.include?('alpha') ||
+      Submon::VERSION.include?('beta') ||
+      Submon::VERSION.include?('pre')
+    puts "Exception type: #{e.class.to_s}"
+    puts e.backtrace
+  end
+end
+

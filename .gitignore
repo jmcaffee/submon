@@ -12,6 +12,7 @@
 
 # Used by dotenv library to load environment variables.
 # .env
+.envsetup
 
 ## Specific to RubyMotion:
 .dat*
@@ -37,6 +38,7 @@ build-iPhoneSimulator/
 
 ## Environment normalization:
 /.bundle/
+/.bin/
 /vendor/bundle
 /lib/bundler/man/
 

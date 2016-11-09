@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+# Uncomment next line for debugging
+#set -vx
+
+bundle install
+
+# Write an example .envsetup file
+OUTFILE=.envsetup         # Name of the file to generate.
+
+
+# -----------------------------------------------------------
+(
+cat <<'EOF'
+#!/bin/bash
+# vi: ft=shell
+
+export GAMEWISP_APP=submon
+export GAMEWISP_ID=ENTER_ID_HERE
+export GAMEWISP_SECRET=ENTER_SECRET_HERE
+
+# When setting up Gamewisp Application Integrations, make sure the Redirect URL
+# is set to http://localhost:8080
+#
+# Gamewisp compares the configured Redirect URL and fails the auth call if it
+# is different than expected.
+
+export GAMEWISP_ENDPOINT_HOST=localhost
+export GAMEWISP_ENDPOINT_PORT=8080
+
+# Use this file by sourcing it before running submon:
+# ex:
+#     source .envsetup && ./exe/submon
+#
+EOF
+) > $OUTFILE
+
+echo
+echo
+echo
+echo "Submon dev setup complete. Confirm there are no errors."
+echo
+echo
+echo
+echo "$OUTFILE has been generated."
+echo "Edit $OUTFILE and replace the ID and SECRET values with values from your Gamewisp Integrations screen."
+echo "Be sure your Gamewisp Integrations screen shows the application's Redirect URL as http://localhost:8080."
+echo
+echo "Use $OUTFILE as:"
+echo
+echo "source $OUTFILE && ./exe/submon"
+echo
