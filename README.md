@@ -32,6 +32,9 @@ requiring changes to the other side.
 Requirements
 -------------------------------------------------------------------------------
 
++ Ruby 2.3.1
++ Bundler gem: `gem install bundler`
+
 _$$ TBD $$_
 
 - - -
