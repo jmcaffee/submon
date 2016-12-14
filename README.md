@@ -66,6 +66,12 @@ Dependencies
 
 [Quetzi Whitelist Import mod](https://github.com/Quetzi/Whitelister)
 
+#### Google Sheets API
+
+[Google Sheets API](https://developers.google.com/sheets/)
+[Ruby Quickstart](https://developers.google.com/sheets/quickstart/ruby)
+[API Client - Ruby](https://github.com/google/google-api-ruby-client)
+
 _$$ TBD $$_
 
 - - -

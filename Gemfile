@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem "gamewisp"
+gem "google-api-client"
+gem "gamewisp", github: "jmcaffee/gamewisp", branch: "master"
 gem "json", "~> 2.0"
 gem "sqlite3"#,        :platforms => [:ruby, :mswin, :mingw]
 gem "sequel"
