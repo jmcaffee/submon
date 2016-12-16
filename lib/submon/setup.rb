@@ -50,7 +50,9 @@ module Submon
 
       puts "Initializing Gamewisp client"
 
-      print_gamewisp_instructions
+      require 'open-uri'
+      extern_ip = open("http://ident.me").read
+      print_gamewisp_instructions extern_ip
 
       puts "  Enter client ID:"
       client_id = get_input
@@ -62,7 +64,8 @@ module Submon
 
       puts " Enter endpoint host (default: localhost):"
       endpoint_host = get_input
-      endpoint_host ||= "localhost"
+      #endpoint_host ||= "localhost"
+      endpoint_host ||= extern_ip
       puts
 
       puts "  Enter endpoint port (default: 8080):"
@@ -91,14 +94,14 @@ module Submon
       client.authorize
     end
 
-    def print_gamewisp_instructions
+    def print_gamewisp_instructions ip
       puts "= Gamewisp Setup ="
       puts
       puts "- Sign in to your Gamewisp account"
       puts "- Go to 'Channel Settings'"
       puts "- Go to 'API'"
       puts "- Enter '#{Submon::APPNAME}' for an Application Name"
-      puts "- Enter 'http://localhost:8080' for a Redirect URL"
+      puts "- Enter 'http://#{ip}:8080' for a Redirect URL"
       puts "- Click Generate Application"
       puts
       puts "The Application Name and the Redirect URL must match exactly"
