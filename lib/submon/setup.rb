@@ -267,6 +267,8 @@ module Submon
     def get_input
       input = $stdin.gets.chomp
       input.strip
+      return nil if input.length <= 0
+      input
     end
 
     def get_key_press
