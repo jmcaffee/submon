@@ -24,7 +24,7 @@ module Submon
     end
 
     def filepath
-      @filepath ||= File.join(Submon.app_data_path, filename)
+      @filepath ||= File.join(Submon.app_data_path(true), filename)
     end
 
     def database
