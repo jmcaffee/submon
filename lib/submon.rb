@@ -88,10 +88,10 @@ module Submon
 end # module
 
 Submon.configure do |config|
-  config.app_path = Submon.app_data_path
+  config.app_path = File.absolute_path(File.join(__dir__, ".."))
+  #config.log_dir = Submon.app_data_path
   config.log_dir = config.app_path
 end
-
 
 # Require each lib file
 #
