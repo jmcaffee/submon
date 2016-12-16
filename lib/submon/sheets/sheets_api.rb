@@ -68,12 +68,13 @@ module Submon
         @service
       end
 
-    def self.usernames_sheet
-      id = '1qpd2aSfLi7Sp-JnaweW7hCvPqam0uSrD_y-anLZMCTM'
-      full_range = 'Sheet1!A1:B'
-      data_range = 'Sheet1!A2:B'
+      def self.usernames_sheet
+        id = '1qpd2aSfLi7Sp-JnaweW7hCvPqam0uSrD_y-anLZMCTM'
+        full_range = 'Sheet1!A1:B'
+        data_range = 'Sheet1!A2:B'
 
-      sheet = Sheets.new(id, full_range, data_range)
+        sheet = Sheets.new(id, full_range, data_range)
+      end
     end
   end
 end

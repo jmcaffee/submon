@@ -7,7 +7,7 @@
 # Website::   http://ktechsystems.com
 ##############################################################################
 
-require_relative 'sheets'
+require_relative 'sheets_api'
 
 module Submon
   module Sheets
