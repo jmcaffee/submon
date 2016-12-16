@@ -22,6 +22,10 @@ module Submon
       setup_gw
       setup_sheets_api
       setup_spreadsheets
+
+      puts
+      puts "Setup complete."
+      puts
     end
 
     def setup_db
@@ -195,6 +199,7 @@ module Submon
       link_data = capture_link("Username")
       Submon.configuration.user_sheet_url = link_data[0]
       Submon.configuration.user_sheet_id = link_data[1]
+      Submon.save_configuration
 
       puts "  You will use this link to direct your users to this spreadsheet to enter their IGNs"
       # https://docs.google.com/spreadsheets/d/1igTHYXYS7ve7a17nSLy14wBwlf1-e0r0skXLq_K5e9g/edit?usp=sharing
@@ -223,6 +228,7 @@ module Submon
       link_data = capture_link("Admin")
       Submon.configuration.admin_sheet_url = link_data[0]
       Submon.configuration.admin_sheet_id = link_data[1]
+      Submon.save_configuration
 
       puts "  You will use this link to edit your username list"
       # https://docs.google.com/spreadsheets/d/1C4wkSzZnNFEzAPcny2abXTYmq0xxX4F-5LCxRJy2YkY/edit?usp=sharing
