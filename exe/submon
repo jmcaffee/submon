@@ -37,19 +37,70 @@ class SubmonApp
     puts "---BEGIN-RESPONSE---"
     puts response
     puts "---END-RESPONSE---"
+
+    # Pull usernames from spreadsheet.
+    # Update users in DB.
+    # Generate user list.
+  end
+
+  def execute_admin
+    puts "Renewing access token..."
+    gw.renew_access_token
+
+    puts "Getting subscribers..."
+    response = gw.get_subscribers
+
+    puts "---BEGIN-RESPONSE---"
+    puts response
+    puts "---END-RESPONSE---"
+
+    # Pull admin commands from spreadsheet.
+    # Update users in DB.
+  end
+
+  def self.usage
+puts <<USAGE
+#{SubmonApp.version}
+Usage: #{Submon::APPNAME} [command]
+
+  When run with no command,
+    - #{Submon::APPNAME} will pull a subscriber list from Gamewisp and update its DB.
+    - Read usernames from a google spreadsheet and update DB.
+    - Generate a list of Minecraft IGNs
+
+    Commands:
+      help      show this help
+      version   display the app version
+      init      setup and configure #{Submon::APPNAME}
+      admin     run #{Submon::APPNAME} in admin mode
+
+USAGE
+  end
+
+  def self.version
+    "#{Submon::APPNAME} #{Submon::VERSION}"
   end
 end
 
 begin
-  if ARGV[0] == "init"
+  if ARGV.first == "-h" or ARGV.first == "--help" or ARGV.first == "help"
+    SubmonApp.usage
+  elsif ARGV.first == "--version" or ARGV.first == "version"
+    puts SubmonApp.version
+  elsif ARGV.first == "init"
     Submon::Setup.new.execute
+  elsif ARGV.first == "admin"
+    SubmonApp.new.execute_admin
+  elsif !ARGV.first.nil?
+    SubmonApp.usage
   else
     SubmonApp.new.execute
   end
 rescue SystemExit
 
 rescue Exception => e
-  puts "An error occurred.\nPlease send the following information to support@ktechsystems.com:"
+  puts "An error occurred."
+  puts "Please send the following information to support@ktechsystems.com:"
   puts
   puts Submon::APPNAME + " " + Submon::VERSION
   puts

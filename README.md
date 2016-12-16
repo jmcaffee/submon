@@ -85,6 +85,19 @@ Clone the app from github using
 
     git clone https://github.com/jmcaffee/submon.git
 
+#### As a User
+
+Setup submon:
+
+    cd submon
+    bundle install
+    ./exe/submon init
+
+Follow the instructions on the screen to setup submon, Gamewisp and your Google
+Spreadsheets.
+
+#### As a Developer
+
 Run the `setup` script
 
     ./bin/setup
