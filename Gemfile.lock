@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/jmcaffee/gamewisp.git
-  revision: bc1bee69342f149dc76857ba0fcf3bd9ec475fd8
+  revision: 4292c6c3a576a42857ca1c95395ef68f85128e59
   branch: master
   specs:
     gamewisp (0.1.0)
