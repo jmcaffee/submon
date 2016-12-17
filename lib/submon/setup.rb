@@ -41,6 +41,8 @@ module Submon
     end
 
     def setup_gw
+      Gamewisp.load_configuration
+
       unless Gamewisp.configuration.client_secret.nil?
         puts "It looks like you've already configured Gamewisp."
         puts "Do you want to re-configure Gamewisp? (y/n)"
