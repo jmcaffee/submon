@@ -22,7 +22,10 @@ module Submon
         @spreadsheet_id = id
         @range_full = full_range
         @range_data = data_range
-        @api = SheetsApi.new
+      end
+
+      def api
+        @api ||= SheetsApi.new
       end
 
       def service
