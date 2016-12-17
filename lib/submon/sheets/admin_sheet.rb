@@ -23,8 +23,8 @@ module Submon
         @id = spreadsheet_id
       end
 
-      def reset
-        super.reset(header)
+      def reset_sheet
+        reset(header)
       end
 
     end

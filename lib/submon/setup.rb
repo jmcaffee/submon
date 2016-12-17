@@ -177,11 +177,11 @@ module Submon
 
       puts "Initializing Username spreadsheet"
       user_sheet = Submon::Sheets::UserSheet.new(Submon.configuration.user_sheet_id)
-      user_sheet.reset
+      user_sheet.reset_sheet
 
       puts "Initializing Admin spreadsheet"
       admin_sheet = Submon::Sheets::AdminSheet.new(Submon.configuration.admin_sheet_id)
-      admin_sheet.reset
+      admin_sheet.reset_sheet
     end
 
     def setup_username_spreadsheet
@@ -215,6 +215,8 @@ module Submon
       puts "  - Click 'Save changes'"
       puts "- Click 'Done'"
       puts
+      puts "Hit [Enter] to continue"
+      get_input
     end
 
     def setup_admin_spreadsheet
@@ -244,6 +246,8 @@ module Submon
       puts "  - Click 'Save changes'"
       puts "- Click 'Done'"
       puts
+      puts "Hit [Enter] to continue"
+      get_input
     end
 
     def capture_link(link_type)
