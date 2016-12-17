@@ -187,6 +187,15 @@ module Submon
     def setup_username_spreadsheet
       puts "= Create Username Spreadsheet ="
 
+      Submon.load_configuration
+
+      unless Submon.configuration.user_sheet_id.nil?
+        puts "It looks like you've already configured a Username spreadsheet."
+        puts "Do you want to reset the spreadsheet link? (y/n)"
+        do_setup = get_input
+        return unless do_setup.downcase == "y"
+      end
+
       puts
       puts "Create an empty spreadsheet for users to enter their Gamewisp username"
       puts "and Minecraft IGN on."
@@ -221,6 +230,15 @@ module Submon
 
     def setup_admin_spreadsheet
       puts "= Create Admin Spreadsheet ="
+
+      Submon.load_configuration
+
+      unless Submon.configuration.admin_sheet_id.nil?
+        puts "It looks like you've already configured an Admin spreadsheet."
+        puts "Do you want to reset the spreadsheet link? (y/n)"
+        do_setup = get_input
+        return unless do_setup.downcase == "y"
+      end
 
       puts
       puts "Create an empty spreadsheet for modifying/updating stored username data"
