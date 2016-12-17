@@ -47,7 +47,7 @@ module Submon
           puts url
           puts
           puts "Paste auth code here:"
-          code = gets
+          code = $stdin.gets
           credentials = authorizer.get_and_store_credentials_from_code(
             user_id: user_id, code: code, base_url: OOB_URI)
         end
