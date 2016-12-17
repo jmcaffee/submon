@@ -12,15 +12,10 @@ module Submon
     class AdminSheet < Sheet
 
       attr_reader :header
-      attr_reader :full_range
-      attr_reader :data_range
-      attr_reader :id
 
       def initialize(spreadsheet_id)
+        super(spreadsheet_id, 'Sheet1!A1:D', 'Sheet1!A2:D')
         @header = ["Username", "Minecraft IGN", "Source (gw, p, etc.)", "Type (user, op, etc.)", "Status (active, inactive, deleted)", "Action (c, r, u, d)", "Processing Status"]
-        @full_range = 'Sheet1!A1:D'
-        @data_range = 'Sheet1!A2:D'
-        @id = spreadsheet_id
       end
 
       def reset_sheet

@@ -12,15 +12,10 @@ module Submon
     class UserSheet < Sheet
 
       attr_reader :header
-      attr_reader :full_range
-      attr_reader :data_range
-      attr_reader :id
 
       def initialize(spreadsheet_id)
+        super(spreadsheet_id, 'Sheet1!A1:B', 'Sheet1!A2:B')
         @header = ["GameWisp Username", "Minecraft IGN"]
-        @full_range = 'Sheet1!A1:B'
-        @data_range = 'Sheet1!A2:B'
-        @id = spreadsheet_id
       end
 
       def reset_sheet
