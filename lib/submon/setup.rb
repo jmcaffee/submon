@@ -135,7 +135,8 @@ module Submon
       puts "  - enter the name 'Submon', and click the 'Create' button"
       puts "- Click 'OK' to dismiss the resulting dialog"
       puts "- Click the down arrow icon (Download JSON) button to the right of the client ID"
-      puts "  - Save the 'client_secret.json' file"
+      puts "  - Save the 'client_secret_xxxxxxx.json' file"
+      puts "  - Rename the 'client_secret_xxxxxxx.json' file to 'client_secret.json'"
       puts
       puts "Upload the saved 'client_secret.json' file to"
       puts "#{Submon.app_data_path} on this machine."
@@ -148,7 +149,7 @@ module Submon
           puts "  Quitting..."
           return
         end
-        sleep 5
+        sleep 1
       end
 
       puts "File detected..."
@@ -157,7 +158,7 @@ module Submon
       enter = get_input
 
       puts
-      Submon::SheetsApi.new.authorize
+      Submon::Sheets::SheetsApi.new.authorize
     end
 
     def client_secret_file_found
