@@ -62,7 +62,7 @@ module Submon
       client_secret = get_input
       puts
 
-      puts " Enter endpoint host (default: localhost):"
+      puts " Enter endpoint host (default: #{extern_ip}):"
       endpoint_host = get_input
       #endpoint_host ||= "localhost"
       endpoint_host ||= extern_ip
@@ -161,7 +161,7 @@ module Submon
     def client_secret_file_found
       secret_file = File.join(Submon.app_data_path, "client_secret.json")
 
-      if File.exist(secret_file)
+      if File.exist?(secret_file)
         return true
       end
 
