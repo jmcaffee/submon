@@ -14,8 +14,14 @@ module Submon
       attr_reader :header
 
       def initialize(spreadsheet_id)
-        super(spreadsheet_id, 'Sheet1!A1:D', 'Sheet1!A2:D')
-        @header = ["Username", "Minecraft IGN", "Source (gw, p, etc.)", "Type (user, op, etc.)", "Status (active, inactive, deleted)", "Action (c, r, u, d)", "Processing Status"]
+        super(spreadsheet_id, 'Sheet1!A1:G', 'Sheet1!A2:G')
+        @header = ["Username",
+                   "Minecraft IGN",
+                   "Source (gw, p, etc.)",
+                   "Type (user, op, etc.)",
+                   "Status (active, inactive, deleted)",
+                   "Action (c, r, u, d)",
+                   "Processing Status"]
       end
 
       def reset_sheet
