@@ -127,6 +127,12 @@ module Submon
         do_setup = get_input
         return unless do_setup.downcase == "y"
         puts
+
+        # Wipe out the credentials/token file if it exists.
+        creds_file = File.join(Submon.app_data_path, "sheets.googleapis.com-submon.yaml")
+        if File.exist?(creds_file)
+          FileUtils.rm(creds_file)
+        end
       end
 
       puts <<DETAILS
