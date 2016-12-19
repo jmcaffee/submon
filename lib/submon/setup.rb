@@ -116,6 +116,79 @@ module Submon
     end
 
     def setup_sheets_api
+      secret_file = File.join(Submon.app_data_path, "client_secret.json")
+
+      puts "= Google Sheets API Setup ="
+      puts
+
+      if File.exist?(secret_file)
+        puts "  A Google API authorization file already exists."
+        puts "  Do you want to re-create the auth file? (y/n)"
+        do_setup = get_input
+        return unless do_setup.downcase == "y"
+        puts
+      end
+
+      puts <<DETAILS
+
+Generate credentials for the Google Sheets API
+
+On a computer with a browser, perform the following steps to generate a
+client ID and secret:
+
+- Go to https://console.developers.google.com/start/api?id=sheets.googleapis.com
+- Click 'Continue', then 'Go to credentials'
+- On the 'Add credentials to your project' page, click the 'Cancel' button
+- At the top of the page, select the 'OAuth consent screen' tab
+  - Select an Email address, enter 'Submon' for a Product name
+    and click the Save button
+- Select the 'Credentials' tab
+  - click the 'Create credentials' button and select 'OAuth client ID'
+- Select the application type 'Other'
+  - enter the name 'Submon', and click the 'Create' button
+- Copy/paste the results into the following questions
+
+DETAILS
+
+
+      client_id = nil
+      while client_id.nil?
+        puts "  Enter Client ID:"
+        client_id = get_input
+        puts
+      end
+
+      client_secret = nil
+      while client_secret.nil?
+        puts "  Enter Client Secret:"
+        client_secret = get_input
+        puts
+      end
+
+      data = {}
+      data["installed"] = {}
+      data["installed"]["client_id"] = client_id
+      data["installed"]["client_secret"] = client_secret
+
+      File.open(secret_file, "w") do |f|
+        f << data.to_json
+        f.flush
+      end
+
+      puts <<DETAILS
+- Click 'OK' to dismiss the dialog
+
+Press [Enter] to attempt authorization...
+
+DETAILS
+
+      enter = get_input
+
+      puts
+      Submon::Sheets::SheetsApi.new.authorize
+    end
+
+    def setup_sheets_api_orig
       puts "= Google Sheets API Setup ="
       puts
       puts "Generate credentials for the Google Sheets API"
